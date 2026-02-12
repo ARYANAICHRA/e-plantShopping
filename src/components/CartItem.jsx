@@ -22,6 +22,13 @@ export default function CartItem({ goToProducts, goToCart }) {
     }
   }
 
+  const handleIncrement = (item) => {
+    dispatch(updateQuantity({
+      id: item.id,
+      quantity: item.quantity + 1
+    }))
+  }
+
   return (
     <>
       <Navbar goToCart={goToCart} />
@@ -44,7 +51,7 @@ export default function CartItem({ goToProducts, goToCart }) {
                 <div style={{marginTop:6}} className="cart-actions">
                   <button className="qty-btn" onClick={() => handleDecrement(item)}>-</button>
                   <div>Qty: {item.quantity}</div>
-                  <button className="qty-btn" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}>+</button>
+                  <button className="qty-btn" onClick={() => handleIncrement(item)}>+</button>
                   <button className="cart-item-delete" style={{marginLeft:12}} onClick={() => dispatch(removeItem(item.id))}>Delete</button>
                 </div>
               </div>
