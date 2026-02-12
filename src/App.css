@@ -5,6 +5,39 @@
 }
 *{box-sizing:border-box}
 body,html,#root{height:100%;margin:0;font-family:Inter, system-ui, Arial, sans-serif}
+.landing-container{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background-image:url('https://images.unsplash.com/photo-1524594154904-1a5b6e5b3b4d?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1600');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  text-align:center;
+}
+.landing-container h1{
+  font-size:48px;
+  margin:0 0 24px;
+  text-shadow:2px 2px 4px rgba(0,0,0,0.3);
+}
+.get-started-btn{
+  padding:12px 32px;
+  font-size:16px;
+  border-radius:8px;
+  border:0;
+  background:var(--accent);
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:all 0.3s ease;
+}
+.get-started-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 4px 12px rgba(46,139,87,0.4);
+}
+
 .landing{
   min-height:100vh;
   display:flex;

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addItem } from '../redux/CartSlice.jsx'
+import Navbar from './Navbar'
 
 const placeholder = (text) => `https://via.placeholder.com/150?text=${encodeURIComponent(text)}`
 
@@ -43,42 +44,46 @@ const CATEGORIES = [
   }
 ]
 
-export default function ProductList({ navigate }) {
+export default function ProductList({ goToCart, goToProducts }) {
   const cartItems = useSelector((state) => state.cart.items)
   const dispatch = useDispatch()
 
-  const inCart = (id) => cartItems.some((c) => c.id === id)
-
   return (
-    <div className="container">
-      <h2>Plant Categories</h2>
-      <div className="categories">
-        {CATEGORIES.map((cat) => (
-          <div className="category-card" key={cat.id}>
-            <div className="category-title">{cat.title}</div>
-            <div className="products">
-              {cat.items.map((p) => (
-                <div className="product" key={p.id}>
-                  <img src={p.image} alt={p.name} />
-                  <div className="product-info">
-                    <div className="product-name">{p.name}</div>
-                    <div className="product-price">${p.price.toFixed(2)}</div>
-                  </div>
-                  <div>
-                    <button
-                      className="btn"
-                      disabled={inCart(p.id)}
-                      onClick={() => dispatch(addItem(p))}
-                    >
-                      {inCart(p.id) ? 'Added' : 'Add to Cart'}
-                    </button>
-                  </div>
-                </div>
-              ))}
+    <>
+      <Navbar goToCart={goToCart} />
+      <div className="container">
+        <h2>Plant Categories</h2>
+        <div className="categories">
+          {CATEGORIES.map((cat) => (
+            <div className="category-card" key={cat.id}>
+              <div className="category-title">{cat.title}</div>
+              <div className="products">
+                {cat.items.map((plant) => {
+                  const isInCart = cartItems.some(item => item.id === plant.id)
+                  return (
+                    <div className="product" key={plant.id}>
+                      <img src={plant.image} alt={plant.name} />
+                      <div className="product-info">
+                        <div className="product-name">{plant.name}</div>
+                        <div className="product-price">${plant.price.toFixed(2)}</div>
+                      </div>
+                      <div>
+                        <button
+                          className="btn"
+                          onClick={() => dispatch(addItem(plant))}
+                          disabled={isInCart}
+                        >
+                          {isInCart ? 'Added' : 'Add to Cart'}
+                        </button>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
