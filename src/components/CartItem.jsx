@@ -31,7 +31,7 @@ export default function CartItem({ goToProducts, goToCart }) {
           {cartItems.length === 0 && (
             <div>
               <p>Your cart is empty.</p>
-              <button className="btn" onClick={goToProducts}>Continue Shopping</button>
+              <button className="get-started-button" onClick={goToProducts}>Continue Shopping</button>
             </div>
           )}
 
@@ -45,7 +45,7 @@ export default function CartItem({ goToProducts, goToCart }) {
                   <button className="qty-btn" onClick={() => handleDecrement(item)}>-</button>
                   <div>Qty: {item.quantity}</div>
                   <button className="qty-btn" onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}>+</button>
-                  <button className="btn" style={{marginLeft:12}} onClick={() => dispatch(removeItem(item.id))}>Delete</button>
+                  <button className="cart-item-delete" style={{marginLeft:12}} onClick={() => dispatch(removeItem(item.id))}>Delete</button>
                 </div>
               </div>
               <div style={{minWidth:120,textAlign:'right'}}>
@@ -57,8 +57,8 @@ export default function CartItem({ goToProducts, goToCart }) {
           {cartItems.length > 0 && (
             <div className="summary">
               <div>
-                <button className="btn" onClick={() => alert('Coming Soon')}>Checkout</button>
-                <button className="btn" style={{marginLeft:8}} onClick={goToProducts}>Continue Shopping</button>
+                <button className="get-started-button1" onClick={() => alert('Coming Soon')}>Checkout</button>
+                <button className="get-started-button" style={{marginLeft:8}} onClick={goToProducts}>Continue Shopping</button>
               </div>
               <div style={{fontWeight:700}}>Total: ${calculateTotalAmount().toFixed(2)}</div>
             </div>
